@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5f7700e5dc3c5577262734fb8244ee83 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; bottom: 30px; left: 30px; z-index: 1000;
+            background-color: rgba(0,0,0,0.8); padding: 15px; border-radius: 8px;
+            font-family: Arial; color: white; font-size: 13px;">
+    <b>Water Stress Level (WRI)</b><br>
+    <span style="color: green;">●</span> Low (0-2)<br>
+    <span style="color: orange;">●</span> Medium-High (2-3)<br>
+    <span style="color: red;">●</span> High (3-4)<br>
+    <span style="color: darkred;">●</span> Extremely High (4-5)<br>
+    <br><b>Dot Size</b> = Facility Capacity (MW)<br>
+    <br><i>42% of AI data centres are in<br>high water-stress zones</i>
+</div>
+    
+<div style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1000;
+            background-color: rgba(0,0,0,0.85); padding: 12px 25px; border-radius: 8px;
+            font-family: Arial; color: white; font-size: 18px; font-weight: bold;">
+    AI Data Centres & Water Stress — Global Map
+</div>
+    
+            <div class="folium-map" id="map_5f7700e5dc3c5577262734fb8244ee83" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5f7700e5dc3c5577262734fb8244ee83 = L.map(
+                "map_5f7700e5dc3c5577262734fb8244ee83",
+                {
+                    center: [25.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 2,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b560324c41f666dc5f1f609347ad8d34 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b560324c41f666dc5f1f609347ad8d34.addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+            var circle_marker_784f820a2ba9942b2ac916f6e77e209f = L.circleMarker(
+                [45.5946, -121.1787],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_d3b1dd82cb7a3bda623723ed8d0d4bcd = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_348612ae8aef4da9b88edd73c906ec5c = $(`<div id="html_348612ae8aef4da9b88edd73c906ec5c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">The Dalles</h4>         <b>Company:</b> Google<br>         <b>Capacity:</b> 200 MW<br>         <b>Water Stress:</b> 1.5/5 (Low)<br>         <b>Coords:</b> 45.59, -121.18     </div>     </div>`)[0];
+                popup_d3b1dd82cb7a3bda623723ed8d0d4bcd.setContent(html_348612ae8aef4da9b88edd73c906ec5c);
+            
+        
+
+        circle_marker_784f820a2ba9942b2ac916f6e77e209f.bindPopup(popup_d3b1dd82cb7a3bda623723ed8d0d4bcd)
+        ;
+
+        
+    
+    
+            circle_marker_784f820a2ba9942b2ac916f6e77e209f.bindTooltip(
+                `<div>
+                     Google — The Dalles (200 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_32ee9f50fc4f42840819bd5db3ba4add = L.circleMarker(
+                [41.2619, -95.8608],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_4467438bf82a9283016b03b3260fdcc0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b4bfe9873fedec6e3a5fac1a8c3ad354 = $(`<div id="html_b4bfe9873fedec6e3a5fac1a8c3ad354" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Council Bluffs</h4>         <b>Company:</b> Google<br>         <b>Capacity:</b> 350 MW<br>         <b>Water Stress:</b> 2.0/5 (Medium-High)<br>         <b>Coords:</b> 41.26, -95.86     </div>     </div>`)[0];
+                popup_4467438bf82a9283016b03b3260fdcc0.setContent(html_b4bfe9873fedec6e3a5fac1a8c3ad354);
+            
+        
+
+        circle_marker_32ee9f50fc4f42840819bd5db3ba4add.bindPopup(popup_4467438bf82a9283016b03b3260fdcc0)
+        ;
+
+        
+    
+    
+            circle_marker_32ee9f50fc4f42840819bd5db3ba4add.bindTooltip(
+                `<div>
+                     Google — Council Bluffs (350 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b225620e6ef2e2380587aad047d601d1 = L.circleMarker(
+                [35.914, -81.539],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_f97bf3da56319e379c419f710737a309 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f3ed32cce4df91bda41025b256f1c154 = $(`<div id="html_f3ed32cce4df91bda41025b256f1c154" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Lenoir</h4>         <b>Company:</b> Google<br>         <b>Capacity:</b> 150 MW<br>         <b>Water Stress:</b> 1.2/5 (Low)<br>         <b>Coords:</b> 35.91, -81.54     </div>     </div>`)[0];
+                popup_f97bf3da56319e379c419f710737a309.setContent(html_f3ed32cce4df91bda41025b256f1c154);
+            
+        
+
+        circle_marker_b225620e6ef2e2380587aad047d601d1.bindPopup(popup_f97bf3da56319e379c419f710737a309)
+        ;
+
+        
+    
+    
+            circle_marker_b225620e6ef2e2380587aad047d601d1.bindTooltip(
+                `<div>
+                     Google — Lenoir (150 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_56f070feada0c761abbef0744d246285 = L.circleMarker(
+                [36.3, -95.2],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_a64b6b09c66359d1337264cb4249acbe = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4f4fdd1e3219138635d527a5c6418387 = $(`<div id="html_4f4fdd1e3219138635d527a5c6418387" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Mayes County</h4>         <b>Company:</b> Google<br>         <b>Capacity:</b> 250 MW<br>         <b>Water Stress:</b> 2.8/5 (Medium-High)<br>         <b>Coords:</b> 36.30, -95.20     </div>     </div>`)[0];
+                popup_a64b6b09c66359d1337264cb4249acbe.setContent(html_4f4fdd1e3219138635d527a5c6418387);
+            
+        
+
+        circle_marker_56f070feada0c761abbef0744d246285.bindPopup(popup_a64b6b09c66359d1337264cb4249acbe)
+        ;
+
+        
+    
+    
+            circle_marker_56f070feada0c761abbef0744d246285.bindTooltip(
+                `<div>
+                     Google — Mayes County (250 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3d294e16c5d428d0e85652e0eff46562 = L.circleMarker(
+                [60.5693, 27.1878],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_41d1f3b99c5edb6454688be4b4f4997c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_724c1362f73a325cb001c184a9c419c5 = $(`<div id="html_724c1362f73a325cb001c184a9c419c5" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Hamina</h4>         <b>Company:</b> Google<br>         <b>Capacity:</b> 120 MW<br>         <b>Water Stress:</b> 0.8/5 (Low)<br>         <b>Coords:</b> 60.57, 27.19     </div>     </div>`)[0];
+                popup_41d1f3b99c5edb6454688be4b4f4997c.setContent(html_724c1362f73a325cb001c184a9c419c5);
+            
+        
+
+        circle_marker_3d294e16c5d428d0e85652e0eff46562.bindPopup(popup_41d1f3b99c5edb6454688be4b4f4997c)
+        ;
+
+        
+    
+    
+            circle_marker_3d294e16c5d428d0e85652e0eff46562.bindTooltip(
+                `<div>
+                     Google — Hamina (120 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_02f8f0c9bf1abe281edcc60b4c6b7c51 = L.circleMarker(
+                [50.449, 3.819],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_71a90283002ce55ef2c903c59e7b5f24 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6f80b7d4d03b1506bd8ffec6dca3f7a2 = $(`<div id="html_6f80b7d4d03b1506bd8ffec6dca3f7a2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">St. Ghislain</h4>         <b>Company:</b> Google<br>         <b>Capacity:</b> 180 MW<br>         <b>Water Stress:</b> 1.5/5 (Low)<br>         <b>Coords:</b> 50.45, 3.82     </div>     </div>`)[0];
+                popup_71a90283002ce55ef2c903c59e7b5f24.setContent(html_6f80b7d4d03b1506bd8ffec6dca3f7a2);
+            
+        
+
+        circle_marker_02f8f0c9bf1abe281edcc60b4c6b7c51.bindPopup(popup_71a90283002ce55ef2c903c59e7b5f24)
+        ;
+
+        
+    
+    
+            circle_marker_02f8f0c9bf1abe281edcc60b4c6b7c51.bindTooltip(
+                `<div>
+                     Google — St. Ghislain (180 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1feba40cecc04cf54024ab108d1d66af = L.circleMarker(
+                [24.0518, 120.5161],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_f9d4803063dea1972441643a02a6dc83 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5ac424f24f15055725bc09ef61fbd8e5 = $(`<div id="html_5ac424f24f15055725bc09ef61fbd8e5" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Changhua</h4>         <b>Company:</b> Google<br>         <b>Capacity:</b> 100 MW<br>         <b>Water Stress:</b> 3.5/5 (High)<br>         <b>Coords:</b> 24.05, 120.52     </div>     </div>`)[0];
+                popup_f9d4803063dea1972441643a02a6dc83.setContent(html_5ac424f24f15055725bc09ef61fbd8e5);
+            
+        
+
+        circle_marker_1feba40cecc04cf54024ab108d1d66af.bindPopup(popup_f9d4803063dea1972441643a02a6dc83)
+        ;
+
+        
+    
+    
+            circle_marker_1feba40cecc04cf54024ab108d1d66af.bindTooltip(
+                `<div>
+                     Google — Changhua (100 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9ee598ea8d807c389e76c7e0873a4bec = L.circleMarker(
+                [1.3521, 103.8198],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_15fbc9fd810f0969f99d1a35c836a763 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ed91ee9f15693e776dd9483158ee9d1c = $(`<div id="html_ed91ee9f15693e776dd9483158ee9d1c" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Singapore</h4>         <b>Company:</b> Google<br>         <b>Capacity:</b> 80 MW<br>         <b>Water Stress:</b> 4.2/5 (Extremely High)<br>         <b>Coords:</b> 1.35, 103.82     </div>     </div>`)[0];
+                popup_15fbc9fd810f0969f99d1a35c836a763.setContent(html_ed91ee9f15693e776dd9483158ee9d1c);
+            
+        
+
+        circle_marker_9ee598ea8d807c389e76c7e0873a4bec.bindPopup(popup_15fbc9fd810f0969f99d1a35c836a763)
+        ;
+
+        
+    
+    
+            circle_marker_9ee598ea8d807c389e76c7e0873a4bec.bindTooltip(
+                `<div>
+                     Google — Singapore (80 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8d7ec7b8d84e3ddcf495ab79c2f23a41 = L.circleMarker(
+                [47.2343, -119.8526],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_b613b0797540dbc4e1342c1e1c2920de = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_583cc87e0836ea8c2560cd811b5592f2 = $(`<div id="html_583cc87e0836ea8c2560cd811b5592f2" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Quincy</h4>         <b>Company:</b> Microsoft<br>         <b>Capacity:</b> 400 MW<br>         <b>Water Stress:</b> 2.5/5 (Medium-High)<br>         <b>Coords:</b> 47.23, -119.85     </div>     </div>`)[0];
+                popup_b613b0797540dbc4e1342c1e1c2920de.setContent(html_583cc87e0836ea8c2560cd811b5592f2);
+            
+        
+
+        circle_marker_8d7ec7b8d84e3ddcf495ab79c2f23a41.bindPopup(popup_b613b0797540dbc4e1342c1e1c2920de)
+        ;
+
+        
+    
+    
+            circle_marker_8d7ec7b8d84e3ddcf495ab79c2f23a41.bindTooltip(
+                `<div>
+                     Microsoft — Quincy (400 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f45bb33a1ed70f919dffb1eba3333fb2 = L.circleMarker(
+                [29.4241, -98.4936],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_a2cb8cd15a9ecbe1b6408dacfd7d0b77 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bd62e488208b5ef4efb908c5fdfe8e0e = $(`<div id="html_bd62e488208b5ef4efb908c5fdfe8e0e" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">San Antonio</h4>         <b>Company:</b> Microsoft<br>         <b>Capacity:</b> 300 MW<br>         <b>Water Stress:</b> 4.0/5 (Extremely High)<br>         <b>Coords:</b> 29.42, -98.49     </div>     </div>`)[0];
+                popup_a2cb8cd15a9ecbe1b6408dacfd7d0b77.setContent(html_bd62e488208b5ef4efb908c5fdfe8e0e);
+            
+        
+
+        circle_marker_f45bb33a1ed70f919dffb1eba3333fb2.bindPopup(popup_a2cb8cd15a9ecbe1b6408dacfd7d0b77)
+        ;
+
+        
+    
+    
+            circle_marker_f45bb33a1ed70f919dffb1eba3333fb2.bindTooltip(
+                `<div>
+                     Microsoft — San Antonio (300 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f5440dc2c0aeb29b5a1a53cb325a1b9 = L.circleMarker(
+                [41.5868, -93.625],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_3975bb0161e74f2fd528486cb41b1b5a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_301f67c48d7c86ee0fbc53e51bb30e68 = $(`<div id="html_301f67c48d7c86ee0fbc53e51bb30e68" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Des Moines</h4>         <b>Company:</b> Microsoft<br>         <b>Capacity:</b> 250 MW<br>         <b>Water Stress:</b> 2.2/5 (Medium-High)<br>         <b>Coords:</b> 41.59, -93.62     </div>     </div>`)[0];
+                popup_3975bb0161e74f2fd528486cb41b1b5a.setContent(html_301f67c48d7c86ee0fbc53e51bb30e68);
+            
+        
+
+        circle_marker_0f5440dc2c0aeb29b5a1a53cb325a1b9.bindPopup(popup_3975bb0161e74f2fd528486cb41b1b5a)
+        ;
+
+        
+    
+    
+            circle_marker_0f5440dc2c0aeb29b5a1a53cb325a1b9.bindTooltip(
+                `<div>
+                     Microsoft — Des Moines (250 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b6bd8ec75dd2e014ca19b3433d47db00 = L.circleMarker(
+                [41.14, -104.8202],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_5a84ed0975e7a88adb800ad91dd29fc2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3561a9a96781828abd17e8635c13b880 = $(`<div id="html_3561a9a96781828abd17e8635c13b880" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Cheyenne</h4>         <b>Company:</b> Microsoft<br>         <b>Capacity:</b> 200 MW<br>         <b>Water Stress:</b> 3.2/5 (High)<br>         <b>Coords:</b> 41.14, -104.82     </div>     </div>`)[0];
+                popup_5a84ed0975e7a88adb800ad91dd29fc2.setContent(html_3561a9a96781828abd17e8635c13b880);
+            
+        
+
+        circle_marker_b6bd8ec75dd2e014ca19b3433d47db00.bindPopup(popup_5a84ed0975e7a88adb800ad91dd29fc2)
+        ;
+
+        
+    
+    
+            circle_marker_b6bd8ec75dd2e014ca19b3433d47db00.bindTooltip(
+                `<div>
+                     Microsoft — Cheyenne (200 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9e6442f246233c54ebbdaceedcf3fd18 = L.circleMarker(
+                [53.3498, -6.2603],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_00ea4ae49be1e21bded50b90fa0f2237 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_84aed9fca93bfb5f19f02aa5dd9432ff = $(`<div id="html_84aed9fca93bfb5f19f02aa5dd9432ff" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Dublin</h4>         <b>Company:</b> Microsoft<br>         <b>Capacity:</b> 180 MW<br>         <b>Water Stress:</b> 1.0/5 (Low)<br>         <b>Coords:</b> 53.35, -6.26     </div>     </div>`)[0];
+                popup_00ea4ae49be1e21bded50b90fa0f2237.setContent(html_84aed9fca93bfb5f19f02aa5dd9432ff);
+            
+        
+
+        circle_marker_9e6442f246233c54ebbdaceedcf3fd18.bindPopup(popup_00ea4ae49be1e21bded50b90fa0f2237)
+        ;
+
+        
+    
+    
+            circle_marker_9e6442f246233c54ebbdaceedcf3fd18.bindTooltip(
+                `<div>
+                     Microsoft — Dublin (180 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0753aaf9cee7a5dda7801045c087d8f2 = L.circleMarker(
+                [52.3676, 4.9041],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_ff3c06eeb63dc74470604464733918bc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_406cc0825f52bf12b10b3d43fe724cf7 = $(`<div id="html_406cc0825f52bf12b10b3d43fe724cf7" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Amsterdam</h4>         <b>Company:</b> Microsoft<br>         <b>Capacity:</b> 220 MW<br>         <b>Water Stress:</b> 1.3/5 (Low)<br>         <b>Coords:</b> 52.37, 4.90     </div>     </div>`)[0];
+                popup_ff3c06eeb63dc74470604464733918bc.setContent(html_406cc0825f52bf12b10b3d43fe724cf7);
+            
+        
+
+        circle_marker_0753aaf9cee7a5dda7801045c087d8f2.bindPopup(popup_ff3c06eeb63dc74470604464733918bc)
+        ;
+
+        
+    
+    
+            circle_marker_0753aaf9cee7a5dda7801045c087d8f2.bindTooltip(
+                `<div>
+                     Microsoft — Amsterdam (220 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3a389e18168bcb8b6cd797a0944c7f25 = L.circleMarker(
+                [18.5204, 73.8567],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_3be6b0fb76ee43e8abb478bd7eaeee84 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9daba6587725c7800501b5bb44fa26ff = $(`<div id="html_9daba6587725c7800501b5bb44fa26ff" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Pune</h4>         <b>Company:</b> Microsoft<br>         <b>Capacity:</b> 120 MW<br>         <b>Water Stress:</b> 4.5/5 (Extremely High)<br>         <b>Coords:</b> 18.52, 73.86     </div>     </div>`)[0];
+                popup_3be6b0fb76ee43e8abb478bd7eaeee84.setContent(html_9daba6587725c7800501b5bb44fa26ff);
+            
+        
+
+        circle_marker_3a389e18168bcb8b6cd797a0944c7f25.bindPopup(popup_3be6b0fb76ee43e8abb478bd7eaeee84)
+        ;
+
+        
+    
+    
+            circle_marker_3a389e18168bcb8b6cd797a0944c7f25.bindTooltip(
+                `<div>
+                     Microsoft — Pune (120 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e852d9c4f725f2a8e7189b3b1e64bf89 = L.circleMarker(
+                [33.4484, -112.074],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_6aa763f62662b4af9f0e38571cfdd779 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c390ecace994a309e7e77fde1205cb9f = $(`<div id="html_c390ecace994a309e7e77fde1205cb9f" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Phoenix</h4>         <b>Company:</b> Microsoft<br>         <b>Capacity:</b> 350 MW<br>         <b>Water Stress:</b> 4.8/5 (Extremely High)<br>         <b>Coords:</b> 33.45, -112.07     </div>     </div>`)[0];
+                popup_6aa763f62662b4af9f0e38571cfdd779.setContent(html_c390ecace994a309e7e77fde1205cb9f);
+            
+        
+
+        circle_marker_e852d9c4f725f2a8e7189b3b1e64bf89.bindPopup(popup_6aa763f62662b4af9f0e38571cfdd779)
+        ;
+
+        
+    
+    
+            circle_marker_e852d9c4f725f2a8e7189b3b1e64bf89.bindTooltip(
+                `<div>
+                     Microsoft — Phoenix (350 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0765230ea6d70c314f8d03322c5ecdd0 = L.circleMarker(
+                [44.3101, -120.834],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.6, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_0d0b858b8251193d46aebe92e15bbd3a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_88ed9a2f7c970ae35251660d37c71874 = $(`<div id="html_88ed9a2f7c970ae35251660d37c71874" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Prineville</h4>         <b>Company:</b> Meta<br>         <b>Capacity:</b> 280 MW<br>         <b>Water Stress:</b> 2.0/5 (Medium-High)<br>         <b>Coords:</b> 44.31, -120.83     </div>     </div>`)[0];
+                popup_0d0b858b8251193d46aebe92e15bbd3a.setContent(html_88ed9a2f7c970ae35251660d37c71874);
+            
+        
+
+        circle_marker_0765230ea6d70c314f8d03322c5ecdd0.bindPopup(popup_0d0b858b8251193d46aebe92e15bbd3a)
+        ;
+
+        
+    
+    
+            circle_marker_0765230ea6d70c314f8d03322c5ecdd0.bindTooltip(
+                `<div>
+                     Meta — Prineville (280 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a8b9ed0083bcfc56de417e1e70a83cdf = L.circleMarker(
+                [35.334, -81.8651],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_6713d51a8576df1e7456ebab86e70ede = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9b411416f91b61b3a033ce59ae58b686 = $(`<div id="html_9b411416f91b61b3a033ce59ae58b686" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Forest City</h4>         <b>Company:</b> Meta<br>         <b>Capacity:</b> 180 MW<br>         <b>Water Stress:</b> 1.5/5 (Low)<br>         <b>Coords:</b> 35.33, -81.87     </div>     </div>`)[0];
+                popup_6713d51a8576df1e7456ebab86e70ede.setContent(html_9b411416f91b61b3a033ce59ae58b686);
+            
+        
+
+        circle_marker_a8b9ed0083bcfc56de417e1e70a83cdf.bindPopup(popup_6713d51a8576df1e7456ebab86e70ede)
+        ;
+
+        
+    
+    
+            circle_marker_a8b9ed0083bcfc56de417e1e70a83cdf.bindTooltip(
+                `<div>
+                     Meta — Forest City (180 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4a2758c23baec3caad56a577dd84f687 = L.circleMarker(
+                [32.7555, -97.3308],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_aee36528d9d757acdaf14169f0281ffb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_15b15de938c9e6b4bc09a7d9991bdf20 = $(`<div id="html_15b15de938c9e6b4bc09a7d9991bdf20" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Fort Worth</h4>         <b>Company:</b> Meta<br>         <b>Capacity:</b> 350 MW<br>         <b>Water Stress:</b> 3.8/5 (High)<br>         <b>Coords:</b> 32.76, -97.33     </div>     </div>`)[0];
+                popup_aee36528d9d757acdaf14169f0281ffb.setContent(html_15b15de938c9e6b4bc09a7d9991bdf20);
+            
+        
+
+        circle_marker_4a2758c23baec3caad56a577dd84f687.bindPopup(popup_aee36528d9d757acdaf14169f0281ffb)
+        ;
+
+        
+    
+    
+            circle_marker_4a2758c23baec3caad56a577dd84f687.bindTooltip(
+                `<div>
+                     Meta — Fort Worth (350 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_40e7c657dfc1c99f1a84646721125809 = L.circleMarker(
+                [65.5848, 22.1547],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_896efb521e35493303242ace76ab386d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_719ef157f66cd48aa11dd8ec08657b14 = $(`<div id="html_719ef157f66cd48aa11dd8ec08657b14" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Lulea</h4>         <b>Company:</b> Meta<br>         <b>Capacity:</b> 200 MW<br>         <b>Water Stress:</b> 0.5/5 (Low)<br>         <b>Coords:</b> 65.58, 22.15     </div>     </div>`)[0];
+                popup_896efb521e35493303242ace76ab386d.setContent(html_719ef157f66cd48aa11dd8ec08657b14);
+            
+        
+
+        circle_marker_40e7c657dfc1c99f1a84646721125809.bindPopup(popup_896efb521e35493303242ace76ab386d)
+        ;
+
+        
+    
+    
+            circle_marker_40e7c657dfc1c99f1a84646721125809.bindTooltip(
+                `<div>
+                     Meta — Lulea (200 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cff0e451c3aebd32edebdf32c8a516da = L.circleMarker(
+                [53.4169, -6.6842],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_b39e5b0d61460f56b192d9d2b11db34c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a4b94b9d9642ebf6bbe08b59f54b621d = $(`<div id="html_a4b94b9d9642ebf6bbe08b59f54b621d" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Clonee</h4>         <b>Company:</b> Meta<br>         <b>Capacity:</b> 220 MW<br>         <b>Water Stress:</b> 1.0/5 (Low)<br>         <b>Coords:</b> 53.42, -6.68     </div>     </div>`)[0];
+                popup_b39e5b0d61460f56b192d9d2b11db34c.setContent(html_a4b94b9d9642ebf6bbe08b59f54b621d);
+            
+        
+
+        circle_marker_cff0e451c3aebd32edebdf32c8a516da.bindPopup(popup_b39e5b0d61460f56b192d9d2b11db34c)
+        ;
+
+        
+    
+    
+            circle_marker_cff0e451c3aebd32edebdf32c8a516da.bindTooltip(
+                `<div>
+                     Meta — Clonee (220 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8cabf4e9c17a10a1b9812d4e99c8b310 = L.circleMarker(
+                [1.293, 103.8558],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_ee805b4af207b6c3dedf55f368fe9d2a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0c242ae553178ca04fb1976462de69a6 = $(`<div id="html_0c242ae553178ca04fb1976462de69a6" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Singapore DC</h4>         <b>Company:</b> Meta<br>         <b>Capacity:</b> 150 MW<br>         <b>Water Stress:</b> 4.2/5 (Extremely High)<br>         <b>Coords:</b> 1.29, 103.86     </div>     </div>`)[0];
+                popup_ee805b4af207b6c3dedf55f368fe9d2a.setContent(html_0c242ae553178ca04fb1976462de69a6);
+            
+        
+
+        circle_marker_8cabf4e9c17a10a1b9812d4e99c8b310.bindPopup(popup_ee805b4af207b6c3dedf55f368fe9d2a)
+        ;
+
+        
+    
+    
+            circle_marker_8cabf4e9c17a10a1b9812d4e99c8b310.bindTooltip(
+                `<div>
+                     Meta — Singapore DC (150 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0e090debca447e0911980f1a56b86c8c = L.circleMarker(
+                [33.4152, -111.8315],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_c1b12bc0d153ee7c6df5158d6612c617 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ab2ac95c94201ca92010d37246075f61 = $(`<div id="html_ab2ac95c94201ca92010d37246075f61" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Mesa</h4>         <b>Company:</b> Meta<br>         <b>Capacity:</b> 300 MW<br>         <b>Water Stress:</b> 4.5/5 (Extremely High)<br>         <b>Coords:</b> 33.42, -111.83     </div>     </div>`)[0];
+                popup_c1b12bc0d153ee7c6df5158d6612c617.setContent(html_ab2ac95c94201ca92010d37246075f61);
+            
+        
+
+        circle_marker_0e090debca447e0911980f1a56b86c8c.bindPopup(popup_c1b12bc0d153ee7c6df5158d6612c617)
+        ;
+
+        
+    
+    
+            circle_marker_0e090debca447e0911980f1a56b86c8c.bindTooltip(
+                `<div>
+                     Meta — Mesa (300 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07377415c66dce005cc2746cf7f88a91 = L.circleMarker(
+                [39.0438, -77.4874],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_bea2ae09f04478a32bc2afa6ff108025 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a2bcb9b18ce46df568692cb876518ab5 = $(`<div id="html_a2bcb9b18ce46df568692cb876518ab5" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Ashburn</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 600 MW<br>         <b>Water Stress:</b> 2.0/5 (Medium-High)<br>         <b>Coords:</b> 39.04, -77.49     </div>     </div>`)[0];
+                popup_bea2ae09f04478a32bc2afa6ff108025.setContent(html_a2bcb9b18ce46df568692cb876518ab5);
+            
+        
+
+        circle_marker_07377415c66dce005cc2746cf7f88a91.bindPopup(popup_bea2ae09f04478a32bc2afa6ff108025)
+        ;
+
+        
+    
+    
+            circle_marker_07377415c66dce005cc2746cf7f88a91.bindTooltip(
+                `<div>
+                     AWS — Ashburn (600 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2cbe533c3274906843cbc3b3eefabd29 = L.circleMarker(
+                [39.9612, -82.9988],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_f8f68778ab1263c1acf65e8efd4a815e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2f4ef6e778a6880b72a2a47b22498166 = $(`<div id="html_2f4ef6e778a6880b72a2a47b22498166" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Columbus</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 250 MW<br>         <b>Water Stress:</b> 1.8/5 (Low)<br>         <b>Coords:</b> 39.96, -83.00     </div>     </div>`)[0];
+                popup_f8f68778ab1263c1acf65e8efd4a815e.setContent(html_2f4ef6e778a6880b72a2a47b22498166);
+            
+        
+
+        circle_marker_2cbe533c3274906843cbc3b3eefabd29.bindPopup(popup_f8f68778ab1263c1acf65e8efd4a815e)
+        ;
+
+        
+    
+    
+            circle_marker_2cbe533c3274906843cbc3b3eefabd29.bindTooltip(
+                `<div>
+                     AWS — Columbus (250 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3ac1d1423f67a446f4bf5a6cc747b936 = L.circleMarker(
+                [44.0521, -123.0868],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_e20686c77df3fc6b5702e83d4b7d52b0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d715e3c2aad204edbc8a415598755676 = $(`<div id="html_d715e3c2aad204edbc8a415598755676" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Oregon</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 400 MW<br>         <b>Water Stress:</b> 1.5/5 (Low)<br>         <b>Coords:</b> 44.05, -123.09     </div>     </div>`)[0];
+                popup_e20686c77df3fc6b5702e83d4b7d52b0.setContent(html_d715e3c2aad204edbc8a415598755676);
+            
+        
+
+        circle_marker_3ac1d1423f67a446f4bf5a6cc747b936.bindPopup(popup_e20686c77df3fc6b5702e83d4b7d52b0)
+        ;
+
+        
+    
+    
+            circle_marker_3ac1d1423f67a446f4bf5a6cc747b936.bindTooltip(
+                `<div>
+                     AWS — Oregon (400 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e1ce0451649550b1bde9f3177a2ff965 = L.circleMarker(
+                [19.076, 72.8777],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_ad5a63c7453e141e7e02fc233dd773ae = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_00424b923fde52b75d4666df042362c7 = $(`<div id="html_00424b923fde52b75d4666df042362c7" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Mumbai</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 200 MW<br>         <b>Water Stress:</b> 4.8/5 (Extremely High)<br>         <b>Coords:</b> 19.08, 72.88     </div>     </div>`)[0];
+                popup_ad5a63c7453e141e7e02fc233dd773ae.setContent(html_00424b923fde52b75d4666df042362c7);
+            
+        
+
+        circle_marker_e1ce0451649550b1bde9f3177a2ff965.bindPopup(popup_ad5a63c7453e141e7e02fc233dd773ae)
+        ;
+
+        
+    
+    
+            circle_marker_e1ce0451649550b1bde9f3177a2ff965.bindTooltip(
+                `<div>
+                     AWS — Mumbai (200 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c9e6bdec792c1020a322279ff232933 = L.circleMarker(
+                [-23.5505, -46.6333],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_03df4c5255108fce2c8d8d61fdd1b298 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_15986b5b5bd87080685a98be8dc02c18 = $(`<div id="html_15986b5b5bd87080685a98be8dc02c18" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Sao Paulo</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 150 MW<br>         <b>Water Stress:</b> 3.0/5 (High)<br>         <b>Coords:</b> -23.55, -46.63     </div>     </div>`)[0];
+                popup_03df4c5255108fce2c8d8d61fdd1b298.setContent(html_15986b5b5bd87080685a98be8dc02c18);
+            
+        
+
+        circle_marker_6c9e6bdec792c1020a322279ff232933.bindPopup(popup_03df4c5255108fce2c8d8d61fdd1b298)
+        ;
+
+        
+    
+    
+            circle_marker_6c9e6bdec792c1020a322279ff232933.bindTooltip(
+                `<div>
+                     AWS — Sao Paulo (150 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c8f12a9826f9f1d12ef63346348081cd = L.circleMarker(
+                [50.1109, 8.6821],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.0, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_048134f0b7706178fc13ea3d23beaee8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_94a47bbad019f3491c517d09e8ee3572 = $(`<div id="html_94a47bbad019f3491c517d09e8ee3572" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Frankfurt</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 300 MW<br>         <b>Water Stress:</b> 1.2/5 (Low)<br>         <b>Coords:</b> 50.11, 8.68     </div>     </div>`)[0];
+                popup_048134f0b7706178fc13ea3d23beaee8.setContent(html_94a47bbad019f3491c517d09e8ee3572);
+            
+        
+
+        circle_marker_c8f12a9826f9f1d12ef63346348081cd.bindPopup(popup_048134f0b7706178fc13ea3d23beaee8)
+        ;
+
+        
+    
+    
+            circle_marker_c8f12a9826f9f1d12ef63346348081cd.bindTooltip(
+                `<div>
+                     AWS — Frankfurt (300 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9f26b6d82cbb68734b0dedaf61921176 = L.circleMarker(
+                [-33.9249, 18.4241],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_eac8b0154724e62e6b81f6906b13ba52 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8a33031c881ed1e2e4adf60b56872698 = $(`<div id="html_8a33031c881ed1e2e4adf60b56872698" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Cape Town</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 100 MW<br>         <b>Water Stress:</b> 3.8/5 (High)<br>         <b>Coords:</b> -33.92, 18.42     </div>     </div>`)[0];
+                popup_eac8b0154724e62e6b81f6906b13ba52.setContent(html_8a33031c881ed1e2e4adf60b56872698);
+            
+        
+
+        circle_marker_9f26b6d82cbb68734b0dedaf61921176.bindPopup(popup_eac8b0154724e62e6b81f6906b13ba52)
+        ;
+
+        
+    
+    
+            circle_marker_9f26b6d82cbb68734b0dedaf61921176.bindTooltip(
+                `<div>
+                     AWS — Cape Town (100 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_24fa7665c59ff2744d89165a3a74b9b4 = L.circleMarker(
+                [26.0667, 50.5577],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_d126a2ebd4890cde897dff0e1d9347d8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0cd1057b095c6b1e370c74fc21b646f3 = $(`<div id="html_0cd1057b095c6b1e370c74fc21b646f3" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Bahrain</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 180 MW<br>         <b>Water Stress:</b> 5.0/5 (Extremely High)<br>         <b>Coords:</b> 26.07, 50.56     </div>     </div>`)[0];
+                popup_d126a2ebd4890cde897dff0e1d9347d8.setContent(html_0cd1057b095c6b1e370c74fc21b646f3);
+            
+        
+
+        circle_marker_24fa7665c59ff2744d89165a3a74b9b4.bindPopup(popup_d126a2ebd4890cde897dff0e1d9347d8)
+        ;
+
+        
+    
+    
+            circle_marker_24fa7665c59ff2744d89165a3a74b9b4.bindTooltip(
+                `<div>
+                     AWS — Bahrain (180 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e75542adb87d31627fb0684f7685f006 = L.circleMarker(
+                [59.3293, 18.0686],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_0c891223cad997a617b4f3a7edaf7adc = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b8c21a462d31faa98a633dc400253b20 = $(`<div id="html_b8c21a462d31faa98a633dc400253b20" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Stockholm</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 200 MW<br>         <b>Water Stress:</b> 0.8/5 (Low)<br>         <b>Coords:</b> 59.33, 18.07     </div>     </div>`)[0];
+                popup_0c891223cad997a617b4f3a7edaf7adc.setContent(html_b8c21a462d31faa98a633dc400253b20);
+            
+        
+
+        circle_marker_e75542adb87d31627fb0684f7685f006.bindPopup(popup_0c891223cad997a617b4f3a7edaf7adc)
+        ;
+
+        
+    
+    
+            circle_marker_e75542adb87d31627fb0684f7685f006.bindTooltip(
+                `<div>
+                     AWS — Stockholm (200 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0cf3bdc0703d8aec5b2891e2520a3400 = L.circleMarker(
+                [35.6762, 139.6503],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 2}
+            ).addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+    
+        var popup_81889c0fcda9cc8f8794b6ec0758481c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_d578247857716c68bfa4e27dd699aa04 = $(`<div id="html_d578247857716c68bfa4e27dd699aa04" style="width: 100.0%; height: 100.0%;">     <div style="font-family: Arial; width: 200px;">         <h4 style="margin: 0 0 5px 0;">Tokyo</h4>         <b>Company:</b> AWS<br>         <b>Capacity:</b> 250 MW<br>         <b>Water Stress:</b> 2.5/5 (Medium-High)<br>         <b>Coords:</b> 35.68, 139.65     </div>     </div>`)[0];
+                popup_81889c0fcda9cc8f8794b6ec0758481c.setContent(html_d578247857716c68bfa4e27dd699aa04);
+            
+        
+
+        circle_marker_0cf3bdc0703d8aec5b2891e2520a3400.bindPopup(popup_81889c0fcda9cc8f8794b6ec0758481c)
+        ;
+
+        
+    
+    
+            circle_marker_0cf3bdc0703d8aec5b2891e2520a3400.bindTooltip(
+                `<div>
+                     AWS — Tokyo (250 MW)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            tile_layer_b560324c41f666dc5f1f609347ad8d34.addTo(map_5f7700e5dc3c5577262734fb8244ee83);
+        
+</script>
+</html>

@@ -1,0 +1,34 @@
+name,company,lat,lon,capacity_mw,wri_stress_score
+The Dalles,Google,45.5946,-121.1787,200,1.5
+Council Bluffs,Google,41.2619,-95.8608,350,2.0
+Lenoir,Google,35.914,-81.539,150,1.2
+Mayes County,Google,36.3,-95.2,250,2.8
+Hamina,Google,60.5693,27.1878,120,0.8
+St. Ghislain,Google,50.449,3.819,180,1.5
+Changhua,Google,24.0518,120.5161,100,3.5
+Singapore,Google,1.3521,103.8198,80,4.2
+Quincy,Microsoft,47.2343,-119.8526,400,2.5
+San Antonio,Microsoft,29.4241,-98.4936,300,4.0
+Des Moines,Microsoft,41.5868,-93.625,250,2.2
+Cheyenne,Microsoft,41.14,-104.8202,200,3.2
+Dublin,Microsoft,53.3498,-6.2603,180,1.0
+Amsterdam,Microsoft,52.3676,4.9041,220,1.3
+Pune,Microsoft,18.5204,73.8567,120,4.5
+Phoenix,Microsoft,33.4484,-112.074,350,4.8
+Prineville,Meta,44.3101,-120.834,280,2.0
+Forest City,Meta,35.334,-81.8651,180,1.5
+Fort Worth,Meta,32.7555,-97.3308,350,3.8
+Lulea,Meta,65.5848,22.1547,200,0.5
+Clonee,Meta,53.4169,-6.6842,220,1.0
+Singapore DC,Meta,1.293,103.8558,150,4.2
+Mesa,Meta,33.4152,-111.8315,300,4.5
+Ashburn,AWS,39.0438,-77.4874,600,2.0
+Columbus,AWS,39.9612,-82.9988,250,1.8
+Oregon,AWS,44.0521,-123.0868,400,1.5
+Mumbai,AWS,19.076,72.8777,200,4.8
+Sao Paulo,AWS,-23.5505,-46.6333,150,3.0
+Frankfurt,AWS,50.1109,8.6821,300,1.2
+Cape Town,AWS,-33.9249,18.4241,100,3.8
+Bahrain,AWS,26.0667,50.5577,180,5.0
+Stockholm,AWS,59.3293,18.0686,200,0.8
+Tokyo,AWS,35.6762,139.6503,250,2.5
